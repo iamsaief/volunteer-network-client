@@ -1,38 +1,260 @@
-.App {
-  text-align: center;
+:root {
+	--default: #000;
+	--primary: #3f90fc;
+	--yellow: #ffbd3e;
+	--orange: #ff7044;
+	--blue: #421fcf;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+	font-family: "Montserrat", sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20px;
+	color: var(--default);
+	background: #f8fafc;
+	position: relative;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* ************** HEADER */
+.btn {
+	font-weight: 400;
+	font-size: 15px;
+	line-height: 22px;
+	border-radius: 6px;
+	padding: 13px 44px;
+}
+.btn.btn-primary {
+	background: var(--primary);
+	color: #fff;
+	border-color: var(--primary);
+}
+.btn.btn-dark {
+	background: #434141;
+	color: #fff;
+	border-color: #434141;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.navbar-light .navbar-nav .nav-link {
+	color: #0b0b0b;
+}
+.navbar-light .navbar-nav .nav-link:hover {
+	color: var(--primary);
 }
 
-.App-link {
-  color: #61dafb;
+/* ************** HOME */
+.vn-home:before {
+	content: "";
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 500px;
+	z-index: -1;
+
+	background: linear-gradient(to bottom, rgb(255 255 255 / 85%), rgb(255 255 255 / 85%)),
+		url(/static/media/home-bg.7a48b185.jpg);
+	background-position: top;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.vn-works-search h2 {
+	font-weight: bold;
+	font-size: 36px;
+	line-height: 44px;
+	text-transform: uppercase;
+}
+
+.vn-works-search .form-group {
+	display: flex;
+	max-width: 616px;
+	margin: 0 auto;
+	position: relative;
+	max-width: 470px;
+}
+.vn-works-search .form-control {
+	background: #fbfbfb;
+	border: 1px solid #d6d6d6;
+	box-sizing: border-box;
+	border-radius: 8px;
+	padding: 5px 15px;
+}
+
+.vn-works-search .form-control,
+.vn-works-search .btn {
+	height: 50px;
+}
+
+.vn-works-search .btn {
+	position: absolute;
+	right: 0;
+	border-radius: 0px 8px 8px 0px;
+}
+
+.vn-works-card {
+	position: relative;
+	margin: 15px 0;
+}
+
+.vn-works-card h4 {
+	position: absolute;
+	bottom: 0;
+	color: #fff;
+	width: 100%;
+	height: 80px;
+	margin: 0;
+	border-radius: 0px 0px 10px 10px;
+	padding: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 24px;
+}
+
+.vn-works-card img {
+	border-radius: 10px 10px 12px 12px;
+	max-width: 100%;
+	object-fit: cover;
+}
+
+[class^="col-"]:nth-child(2n-1) .vn-works-card h4 {
+	background: var(--yellow);
+}
+[class^="col-"]:nth-child(2n) .vn-works-card h4 {
+	background: var(--orange);
+}
+[class^="col-"]:nth-child(3n) .vn-works-card h4 {
+	background: var(--primary);
+}
+[class^="col-"]:nth-child(4n) .vn-works-card h4 {
+	background: var(--blue);
+}
+[class^="col-"]:nth-child(5n) .vn-works-card h4 {
+	background: var(--orange);
+}
+
+/* ************** LOGIN */
+.vn-login-register.login {
+	height: 457px;
+}
+.vn-login-register {
+	background: #ffffff;
+	border: 1px solid #ababab;
+	box-sizing: border-box;
+	border-radius: 4px;
+	text-align: center;
+	width: 570px;
+
+	padding: 55px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.btn.social-login {
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20px;
+	color: #000;
+	width: 100%;
+	display: grid;
+	align-items: center;
+	justify-items: flex-start;
+	grid-auto-flow: column;
+	position: relative;
+	padding: 10px 9px;
+	background: #ffffff;
+	border: 1px solid #c7c7c7;
+	box-sizing: border-box;
+	border-radius: 57px;
+	height: 51px;
+}
+
+.vn-login-register h4 {
+	font-weight: bold;
+	font-size: 24px;
+	line-height: 29px;
+	color: #000000;
+}
+
+.vn-login-register h5 {
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20px;
+	color: #000000;
+}
+
+.vn-login-register h5 a {
+	margin-left: 5px;
+	text-decoration: underline;
+	text-decoration-color: #a0c9ff;
+	color: var(--primary);
+}
+
+/* ************** REGISTER */
+.vn-login-register.register {
+	align-items: stretch;
+	text-align: left;
+}
+
+.vn-login-register.register .form-control,
+.vn-login-register.register .form-control::placeholder {
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20px;
+	color: #000000;
+}
+
+.vn-login-register.register .form-control {
+	border: none;
+	border-bottom: 1px solid #c5c5c5;
+	border-radius: 0;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.vn-login-register.register .btn.btn-primary {
+	border-radius: 0;
+	width: 100%;
+	margin-top: 30px;
+}
+
+.vn-login-register.register .form-group {
+	margin-bottom: 25px;
+}
+
+/* ************** EVENT TASKS */
+.vn-event-tasks {
+}
+
+.vn-task {
+	background: #ffffff;
+	padding: 24px;
+	box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.05);
+	border-radius: 10px;
+	display: grid;
+	grid-auto-flow: column;
+	grid-template-columns: 2fr 2fr 1fr;
+	grid-gap: 20px;
+	align-items: flex-start;
+	margin: 15px 0;
+}
+
+.vn-task button {
+	align-self: flex-end;
+	background: #e3e3e3;
+	border-radius: 5px;
+	border: none;
+	color: #787878;
+	padding: 13px 38px;
+}
+
+.vn-task img {
+	border-radius: 15px;
+}
+
+.vn-task .info {
 }

@@ -1,0 +1,12 @@
+.copyright-info,
+.copyright-info a {
+	font-size: 14px;
+	font-weight: 400;
+	color: var(--secondary);
+}
+.copyright-info span {
+	font-size: 12px;
+}
+.copyright-info a:hover {
+	color: var(--primary);
+}

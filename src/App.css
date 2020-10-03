@@ -258,3 +258,15 @@ body {
 
 .vn-task .info {
 }
+
+.nav-item.user {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	line-height: 1;
+}
+
+.nav-item.user img {
+	max-width: 15px;
+	margin-right: 4px;
+}

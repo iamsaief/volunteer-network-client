@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+import { volunteerTasks } from "../../fakeData/fakeData";
 
 const Register = () => {
+	const { taskId } = useParams();
+
+	const selectedTask = volunteerTasks.find((item) => item.taskId === +taskId);
+
+	const [startDate, setStartDate] = useState(new Date());
+
 	return (
 		<div className="container d-flex align-items-center justify-content-center py-5 my-5">
 			<div className="vn-login-register register p-md-5 p-4">
@@ -13,10 +21,23 @@ const Register = () => {
 						<input type="email" className="form-control" placeholder="Username or Email" name="email" />
 					</div>
 					<div className="form-group">
-						<input type="date" className="form-control" placeholder="date" name="date" />
+						<input
+							type="date"
+							className="form-control"
+							placeholder="date"
+							name="date"
+							defaultValue={startDate}
+							onChange={(e) => setStartDate(e.target.value)}
+						/>
 					</div>
 					<div className="form-group">
-						<input type="text" className="form-control" placeholder="Description" name="description" />
+						<input
+							type="text"
+							className="form-control"
+							placeholder="Description"
+							name="description"
+							defaultValue={selectedTask ? selectedTask.title : "Please pick a task from home page"}
+						/>
 					</div>
 					<button type="submit" className="btn btn-primary">
 						Registration

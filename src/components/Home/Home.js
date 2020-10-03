@@ -4,6 +4,7 @@ import Card from "./Card";
 
 const Home = () => {
 	const tasks = volunteerTasks;
+
 	return (
 		<main className="vn-home pt-5 mt-2">
 			<div className="container text-center">
@@ -18,8 +19,8 @@ const Home = () => {
 				</div>
 				<div className="vn-works py-5 mt-2">
 					<div className="row">
-						{tasks.map((task, index) => (
-							<Card task={task} key={index}></Card>
+						{tasks.map((task) => (
+							<Card task={task} key={task.taskId}></Card>
 						))}
 					</div>
 				</div>

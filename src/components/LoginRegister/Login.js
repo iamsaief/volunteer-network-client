@@ -1,13 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import logo from "../../images/logos/google.png";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import { firebaseConfig } from "../../config/firebaseConfig";
 import { UserContext } from "../../App";
-import { useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 
 const Login = () => {
 	const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+
+	const [alert, setAlert] = useState({
+		success: false,
+		error: "",
+	});
 
 	/* Route redirects after login */
 	const history = useHistory();
@@ -25,7 +30,7 @@ const Login = () => {
 		firebase
 			.auth()
 			.signInWithPopup(provider)
-			.then(function(result) {
+			.then((result) => {
 				const { displayName, email } = result.user;
 				const newUser = {
 					isLoggedIn: true,
@@ -35,16 +40,23 @@ const Login = () => {
 				setLoggedInUser(newUser);
 				history.replace(from);
 
-				console.log(newUser);
+				const newAlert = { ...alert };
+				newAlert.success = true;
+				newAlert.error = "";
+				setAlert(newAlert);
 			})
-			.catch(function(error) {
-				console.log(error.message);
+			.catch((error) => {
+				const newAlert = { ...alert };
+				newAlert.error = error.message;
+				setAlert(newAlert);
 			});
 	};
 
 	return (
 		<div className="container d-flex align-items-center justify-content-center py-5 my-5">
 			<div className="vn-login-register login p-md-5 p-3">
+				{alert.error.length > 0 && <div className="alert alert-danger text-center">{alert.error}</div>}
+
 				<h4 className="mb-5">Login With</h4>
 				<button className="btn btn-outline-secondary social-login" onClick={handleGoogleSignIn}>
 					<img src={logo} alt="" />
@@ -52,7 +64,7 @@ const Login = () => {
 				</button>
 				<h5 className="mt-3">
 					<span>Don’t have an account?</span>
-					<a href="/">Create an account</a>
+					<Link to="/login">Create an account</Link>
 				</h5>
 			</div>
 		</div>

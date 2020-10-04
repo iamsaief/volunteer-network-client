@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { volunteerTasks } from "../../fakeData/fakeData";
 import Card from "./Card";
 
 const Home = () => {
 	const tasks = volunteerTasks;
+
+	const [baseData, setBaseData] = useState([]);
+
+	const handleAddBaseData = () => {
+		console.log(volunteerTasks);
+		fetch("https://still-stream-80611.herokuapp.com/addBaseData", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(volunteerTasks),
+		});
+	};
+
+	useEffect(() => {
+		fetch("https://still-stream-80611.herokuapp.com/home")
+			.then((res) => res.json())
+			.then((data) => setBaseData(data));
+	}, []);
 
 	return (
 		<main className="vn-home pt-5 mt-2">
@@ -18,11 +37,20 @@ const Home = () => {
 					</div>
 				</div>
 				<div className="vn-works py-5 mt-2">
-					<div className="row">
-						{tasks.map((task) => (
-							<Card task={task} key={task.taskId}></Card>
-						))}
-					</div>
+					{baseData.length ? (
+						<div className="row">
+							{baseData.map((task) => (
+								<Card task={task} key={task.taskId}></Card>
+							))}
+						</div>
+					) : (
+						<div style={{ maxWidth: "400px", margin: "auto" }}>
+							<div className="alert alert-warning text-center mb-4">No data found.</div>
+							<button className="btn btn-primary" onClick={handleAddBaseData}>
+								All Base Data
+							</button>
+						</div>
+					)}
 				</div>
 			</div>
 		</main>

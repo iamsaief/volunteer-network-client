@@ -10,7 +10,7 @@ const EventTasks = () => {
 	const [userTasks, setUserTasks] = useState([]);
 
 	useEffect(() => {
-		fetch(`http://localhost:5000/events?email=${loggedInUser.email}`)
+		fetch(`https://still-stream-80611.herokuapp.com/events?email=${loggedInUser.email}`)
 			.then((res) => res.json())
 			.then((data) => {
 				setUserTasks(data);
@@ -19,12 +19,12 @@ const EventTasks = () => {
 	}, []);
 
 	const deleteTask = (id) => {
-		fetch(`http://localhost:5000/deleteTask/${id}`, {
+		fetch(`https://still-stream-80611.herokuapp.com/deleteTask/${id}`, {
 			method: "DELETE",
 		})
 			.then((res) => res.json())
 			.then((result) => {
-				console.log(result, "Deleted successfully", "userTask->", userTasks);
+				console.log("result=", result, "Deleted successfully");
 				if (result) {
 					const newTasks = [...userTasks].filter((task) => task._id !== id);
 					setUserTasks(newTasks);
@@ -39,7 +39,7 @@ const EventTasks = () => {
 					{userTasks.length ? (
 						userTasks.map((task) => <Task task={task} key={Math.random()} deleteTask={deleteTask}></Task>)
 					) : (
-						<div className="col">
+						<div style={{ maxWidth: "400px", margin: "auto" }}>
 							<div className="alert alert-danger text-center">
 								No task found. Please login to add tasks.
 							</div>

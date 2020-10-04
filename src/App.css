@@ -94,8 +94,14 @@ body {
 .vn-works-card {
 	position: relative;
 	margin: 15px 0;
+	border-radius: 12px;
+	transition: 0.4s;
 }
 
+.vn-works-card:hover {
+	box-shadow: 0px 5px 10px 5px rgb(63 144 252 / 15%);
+	transform: translateY(-2px);
+}
 .vn-works-card h4 {
 	position: absolute;
 	bottom: 0;

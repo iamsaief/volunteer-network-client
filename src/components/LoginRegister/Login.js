@@ -12,7 +12,7 @@ const Login = () => {
 	/* Route redirects after login */
 	const history = useHistory();
 	const location = useLocation();
-	const { from } = location.state || { from: { pathname: "/" } };
+	const { from } = location.state || { from: { pathname: "/events" } };
 
 	// Initialize Firebase
 	if (!firebase.apps.length) {

@@ -1,38 +1,50 @@
-import React from "react";
-import image from "../../images/babySit.png";
+import React, { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { UserContext } from "../../App";
 import Task from "./Task";
 
 const EventTasks = () => {
-	const tasks = [
-		{
-			title: "Humanity More",
-			date: "29 sep, 2020",
-			image: image,
-		},
-		{
-			title: "Humanity More",
-			date: "29 sep, 2020",
-			image: image,
-		},
-		{
-			title: "Humanity More",
-			date: "29 sep, 2020",
-			image: image,
-		},
-		{
-			title: "Humanity More",
-			date: "29 sep, 2020",
-			image: image,
-		},
-	];
+	const history = useHistory();
+
+	const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+	const [userTasks, setUserTasks] = useState([]);
+
+	useEffect(() => {
+		fetch(`http://localhost:5000/events?email=${loggedInUser.email}`)
+			.then((res) => res.json())
+			.then((data) => {
+				setUserTasks(data);
+			})
+			.catch((err) => console.log(err));
+	}, []);
+
+	const deleteTask = (id) => {
+		fetch(`http://localhost:5000/deleteTask/${id}`, {
+			method: "DELETE",
+		})
+			.then((res) => res.json())
+			.then((result) => {
+				console.log(result, "Deleted successfully", "userTask->", userTasks);
+				if (result) {
+					const newTasks = [...userTasks].filter((task) => task._id !== id);
+					setUserTasks(newTasks);
+				}
+			});
+	};
 
 	return (
 		<div className="container py-5 my-5">
 			<div className="vn-event-tasks">
 				<div className="row">
-					{tasks.map((task) => (
-						<Task task={task} key={Math.random()}></Task>
-					))}
+					{userTasks.length ? (
+						userTasks.map((task) => <Task task={task} key={Math.random()} deleteTask={deleteTask}></Task>)
+					) : (
+						<div className="col">
+							<div className="alert alert-danger text-center">
+								No task found. Please login to add tasks.
+							</div>
+						</div>
+					)}
 				</div>
 			</div>
 		</div>

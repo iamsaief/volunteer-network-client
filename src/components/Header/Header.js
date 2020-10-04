@@ -33,9 +33,9 @@ const Header = () => {
 							</Link>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link" href="/donation">
-								Donation
-							</a>
+							<Link className="nav-link" to="/events">
+								Events
+							</Link>
 						</li>
 						{!loggedInUser.isLoggedIn && (
 							<li className="nav-item">
@@ -46,7 +46,7 @@ const Header = () => {
 						)}
 						{!loggedInUser.isLoggedIn && (
 							<li className="nav-item">
-								<Link className="nav-link" to="/register">
+								<Link className="nav-link" to="/login">
 									<button className="btn btn-primary">Register</button>
 								</Link>
 							</li>

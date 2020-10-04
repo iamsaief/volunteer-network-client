@@ -4,9 +4,15 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import { firebaseConfig } from "../../config/firebaseConfig";
 import { UserContext } from "../../App";
+import { useHistory, useLocation } from "react-router-dom";
 
 const Login = () => {
 	const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+
+	/* Route redirects after login */
+	const history = useHistory();
+	const location = useLocation();
+	const { from } = location.state || { from: { pathname: "/" } };
 
 	// Initialize Firebase
 	if (!firebase.apps.length) {
@@ -27,6 +33,7 @@ const Login = () => {
 					email: email,
 				};
 				setLoggedInUser(newUser);
+				history.replace(from);
 
 				console.log(newUser);
 			})

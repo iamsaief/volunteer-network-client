@@ -9,6 +9,7 @@ import Login from "./components/LoginRegister/Login";
 import Register from "./components/LoginRegister/Register";
 import EventTasks from "./components/EventTasks/EventTasks";
 import Admin from "./components/Admin/Admin";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 export const UserContext = createContext();
 
@@ -29,12 +30,12 @@ function App() {
 					<Route path="/register">
 						<Register></Register>
 					</Route>
-					<Route path="/event">
+					<Route exact path="/events">
 						<EventTasks></EventTasks>
 					</Route>
-					<Route path="/events/:taskId">
+					<PrivateRoute path="/events/:taskId">
 						<Register></Register>
-					</Route>
+					</PrivateRoute>
 					<Route path="/admin">
 						<Admin></Admin>
 					</Route>

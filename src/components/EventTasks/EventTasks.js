@@ -24,7 +24,7 @@ const EventTasks = () => {
 		})
 			.then((res) => res.json())
 			.then((result) => {
-				console.log("result=", result, "Deleted successfully");
+				console.log(result, "Task deleted ⚠️");
 				if (result) {
 					const newTasks = [...userTasks].filter((task) => task._id !== id);
 					setUserTasks(newTasks);

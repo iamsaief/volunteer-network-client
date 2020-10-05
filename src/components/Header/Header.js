@@ -8,7 +8,7 @@ const Header = () => {
 	const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
 	return (
-		<header className="px-md-5 px-0">
+		<header className="px-lg-5 px-0">
 			<nav className="navbar navbar-expand-md navbar-light">
 				<Link className="navbar-brand" to="/">
 					<img style={{ width: "202.81px" }} src={logo} alt="" />

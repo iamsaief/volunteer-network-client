@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./components/LoginRegister/Login";
 import Register from "./components/LoginRegister/Register";
 import EventTasks from "./components/EventTasks/EventTasks";
-import Admin from "./components/Admin/Admin";
+import AdminDashboard from "./components/Admin/AdminDashboard";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 export const UserContext = createContext();
@@ -37,7 +37,7 @@ function App() {
 						<Register></Register>
 					</PrivateRoute>
 					<Route path="/admin">
-						<Admin></Admin>
+						<AdminDashboard></AdminDashboard>
 					</Route>
 				</Switch>
 				<Footer></Footer>

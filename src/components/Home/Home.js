@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../App";
 import { volunteerTasks } from "../../fakeData/fakeData";
 import Card from "./Card";
 
 const Home = () => {
 	const tasks = volunteerTasks;
 
-	const [baseData, setBaseData] = useState([]);
+	const { user, data } = useContext(UserContext);
+	const [baseData, setBaseData] = data;
+
+	// const [baseData, setBaseData] = useState([]);
 
 	const handleAddBaseData = () => {
 		console.log(volunteerTasks);
@@ -21,7 +25,10 @@ const Home = () => {
 	useEffect(() => {
 		fetch("https://still-stream-80611.herokuapp.com/home")
 			.then((res) => res.json())
-			.then((data) => setBaseData(data));
+			.then((data) => {
+				setBaseData(data);
+				console.log(data);
+			});
 	}, []);
 
 	return (
@@ -40,7 +47,7 @@ const Home = () => {
 					{baseData.length ? (
 						<div className="row">
 							{baseData.map((task) => (
-								<Card task={task} key={task.taskId}></Card>
+								<Card task={task} key={Math.random()}></Card>
 							))}
 						</div>
 					) : (

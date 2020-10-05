@@ -9,7 +9,10 @@ const Register = () => {
 	const { taskId } = useParams();
 	const selectedTask = volunteerTasks.find((item) => item.taskId === +taskId);
 
-	const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+	// const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+	const { user, data } = useContext(UserContext);
+	const [loggedInUser, setLoggedInUser] = user;
+
 	const [startDate, setStartDate] = useState(new Date());
 
 	const [volunteer, setVolunteer] = useState({

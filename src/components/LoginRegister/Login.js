@@ -7,7 +7,9 @@ import { UserContext } from "../../App";
 import { Link, useHistory, useLocation } from "react-router-dom";
 
 const Login = () => {
-	const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+	// const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+	const { user, data } = useContext(UserContext);
+	const [loggedInUser, setLoggedInUser] = user;
 
 	const [alert, setAlert] = useState({
 		success: false,

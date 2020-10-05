@@ -6,7 +6,10 @@ import Task from "./Task";
 const EventTasks = () => {
 	const history = useHistory();
 
-	const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+	// const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+	const { user, data } = useContext(UserContext);
+	const [loggedInUser, setLoggedInUser] = user;
+
 	const [userTasks, setUserTasks] = useState([]);
 
 	useEffect(() => {

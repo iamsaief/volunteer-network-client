@@ -10,7 +10,7 @@ const Task = ({ task, deleteTask }) => {
 					alt="task"
 				/>
 				<div className="info">
-					<h5>{task.taskName}</h5>
+					<h5>{task.title}</h5>
 					<p>{task.date}</p>
 				</div>
 				<button className="btn btn-secondary" onClick={() => deleteTask(task._id)}>

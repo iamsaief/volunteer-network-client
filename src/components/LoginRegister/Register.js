@@ -19,8 +19,8 @@ const Register = () => {
 		name: loggedInUser.name,
 		email: loggedInUser.email,
 		date: "",
-		taskName: selectedTask.title,
-		taskDesc: "",
+		title: selectedTask.title,
+		description: "",
 		img: selectedTask.img,
 	});
 
@@ -104,7 +104,7 @@ const Register = () => {
 							type="text"
 							className="form-control"
 							placeholder="Event task name"
-							name="taskName"
+							name="title"
 							value={selectedTask ? selectedTask.title : "Please pick a task from home page"}
 							onChange={handleInputValue}
 							disabled={true}
@@ -115,7 +115,7 @@ const Register = () => {
 							type="text"
 							className="form-control"
 							placeholder="Description"
-							name="taskDesc"
+							name="description"
 							onChange={handleInputValue}
 						/>
 					</div>

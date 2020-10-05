@@ -5,7 +5,6 @@ import logo from "../../images/logos/logo.png";
 import userIcon from "../../images/logos/users-alt.png";
 
 const Header = () => {
-	// const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 	const { user, data } = useContext(UserContext);
 	const [loggedInUser, setLoggedInUser] = user;
 

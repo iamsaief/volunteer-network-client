@@ -22,7 +22,7 @@ const VolunteerList = ({ tasks, deleteHandler }) => {
 									<td>{task.name}</td>
 									<td>{task.email}</td>
 									<td>{task.date}</td>
-									<td>{task.taskName}</td>
+									<td>{task.title}</td>
 									<td>
 										<button className="btn btn-danger" onClick={() => deleteHandler(task._id)}>
 											<img

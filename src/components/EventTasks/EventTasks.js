@@ -6,21 +6,22 @@ import Task from "./Task";
 const EventTasks = () => {
 	const history = useHistory();
 
-	// const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 	const { user, data } = useContext(UserContext);
 	const [loggedInUser, setLoggedInUser] = user;
 
 	const [userTasks, setUserTasks] = useState([]);
 
+	// Filtering tasks for an user
 	useEffect(() => {
 		fetch(`https://still-stream-80611.herokuapp.com/events?email=${loggedInUser.email}`)
 			.then((res) => res.json())
 			.then((data) => {
-				setUserTasks(data);
+				setUserTasks([...data]);
 			})
 			.catch((err) => console.log(err));
 	}, []);
 
+	// Delete a task
 	const deleteTask = (id) => {
 		fetch(`https://still-stream-80611.herokuapp.com/deleteTask/${id}`, {
 			method: "DELETE",
@@ -39,7 +40,7 @@ const EventTasks = () => {
 		<div className="container py-5 my-5">
 			<div className="vn-event-tasks">
 				<div className="row">
-					{userTasks.length ? (
+					{userTasks.length > 0 ? (
 						userTasks.map((task) => <Task task={task} key={Math.random()} deleteTask={deleteTask}></Task>)
 					) : (
 						<div style={{ maxWidth: "400px", margin: "auto" }}>

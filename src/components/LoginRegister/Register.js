@@ -4,14 +4,14 @@ import { UserContext } from "../../App";
 import { volunteerTasks } from "../../fakeData/fakeData";
 
 const Register = () => {
-	const history = useHistory();
-
-	const { taskId } = useParams();
-	const selectedTask = volunteerTasks.find((item) => item.taskId === +taskId);
-
-	// const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 	const { user, data } = useContext(UserContext);
 	const [loggedInUser, setLoggedInUser] = user;
+	const [baseData, setBaseData] = data;
+
+	const history = useHistory();
+	const { _id } = useParams();
+
+	const selectedTask = baseData.find((item) => item._id == _id);
 
 	const [startDate, setStartDate] = useState(new Date());
 
@@ -24,12 +24,12 @@ const Register = () => {
 		img: selectedTask.img,
 	});
 
+	// Event registration
 	const handleSubmitTask = (e) => {
 		e.preventDefault();
 
 		const newVolunteer = { ...volunteer };
 
-		// Calling post api '/registerVolunteer'
 		fetch("https://still-stream-80611.herokuapp.com/registerVolunteer", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -37,7 +37,7 @@ const Register = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data);
+				console.log("task added->", data);
 				if (data) {
 					history.push("/events");
 				}
@@ -47,8 +47,8 @@ const Register = () => {
 			});
 	};
 
+	// Input fields handler
 	const handleInputValue = (e) => {
-		console.log(e.target.name, e.target.value);
 		const newVolunteer = { ...volunteer };
 		newVolunteer[e.target.name] = e.target.value;
 		if (e.target.name === "date") {
@@ -56,8 +56,6 @@ const Register = () => {
 		}
 		setVolunteer(newVolunteer);
 	};
-
-	// console.log(volunteer);
 
 	return (
 		<div className="container d-flex align-items-center justify-content-center py-5 my-5">

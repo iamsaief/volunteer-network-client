@@ -11,6 +11,7 @@ const AdminDashboard = () => {
 		showAddEvent: false,
 	});
 
+	// Get register users data and update volunteerList
 	useEffect(() => {
 		if (toggleView.showList) {
 			fetch("https://still-stream-80611.herokuapp.com/loadVolunteerList")
@@ -19,6 +20,25 @@ const AdminDashboard = () => {
 		}
 	}, []);
 
+	// Delete a registered user
+	const handleDeleteEvent = (id) => {
+		if (window.confirm("Are you sure to delete this task permanently?")) {
+			console.log("delete clicked", id);
+			fetch(`https://still-stream-80611.herokuapp.com/admin/deleteTask/${id}`, {
+				method: "DELETE",
+			})
+				.then((res) => res.json())
+				.then((result) => {
+					console.log(result, "Task deleted ⚠️");
+					if (result) {
+						const newVolList = volunteerList.filter((task) => task._id !== id);
+						setVolunteerList(newVolList);
+					}
+				});
+		}
+	};
+
+	// Toggle admin menu
 	const handleListView = () => {
 		setToggleView({
 			...toggleView,
@@ -42,23 +62,6 @@ const AdminDashboard = () => {
 		default: {
 			color: "#000000",
 		},
-	};
-
-	const handleDeleteEvent = (id) => {
-		if (window.confirm("Are you sure to delete this task permanently?")) {
-			console.log("delete clicked", id);
-			fetch(`https://still-stream-80611.herokuapp.com/admin/deleteTask/${id}`, {
-				method: "DELETE",
-			})
-				.then((res) => res.json())
-				.then((result) => {
-					console.log(result, "Task deleted ⚠️");
-					if (result) {
-						const newVolList = volunteerList.filter((task) => task._id !== id);
-						setVolunteerList(newVolList);
-					}
-				});
-		}
 	};
 
 	return (

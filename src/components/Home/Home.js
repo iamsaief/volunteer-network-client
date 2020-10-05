@@ -9,8 +9,7 @@ const Home = () => {
 	const { user, data } = useContext(UserContext);
 	const [baseData, setBaseData] = data;
 
-	// const [baseData, setBaseData] = useState([]);
-
+	// If DB is empty then add fake data
 	const handleAddBaseData = () => {
 		console.log(volunteerTasks);
 		fetch("https://still-stream-80611.herokuapp.com/addBaseData", {
@@ -22,12 +21,13 @@ const Home = () => {
 		});
 	};
 
+	// Get data from DB and baseData
 	useEffect(() => {
 		fetch("https://still-stream-80611.herokuapp.com/home")
 			.then((res) => res.json())
 			.then((data) => {
 				setBaseData(data);
-				console.log(data);
+				console.log("Home->", data);
 			});
 	}, []);
 

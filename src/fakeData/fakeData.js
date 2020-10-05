@@ -9,7 +9,11 @@ export const volunteerTasks = [
 		title: "Refuge shelter",
 		img: "refuseShelter.png",
 	},
-	{ taskId: 3, title: "Food Charity", img: "foodCharity.png" },
+	{
+		taskId: 3,
+		title: "Food Charity",
+		img: "foodCharity.png",
+	},
 	{
 		taskId: 4,
 		title: "Host a clothing swap.",

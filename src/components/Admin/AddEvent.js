@@ -9,14 +9,14 @@ const AddEvent = () => {
 
 	const [addTask, setTask] = useState({
 		title: "",
-		img: "defaultImage.png",
 		date: "",
-		taskDesc: "",
+		description: "",
+		img: "defaultImage.png",
 	});
 
+	// Add an event task
 	const handleAddEvent = (e) => {
 		e.preventDefault();
-		// Creating a task
 		fetch("https://still-stream-80611.herokuapp.com/admin/addEvent", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -30,6 +30,7 @@ const AddEvent = () => {
 			.catch((err) => console.log(err));
 	};
 
+	// Input fields handler
 	const handleInputValues = (e) => {
 		if (e.target.value.trim().length > 0) {
 			const newTask = { ...addTask };
@@ -83,7 +84,7 @@ const AddEvent = () => {
 									type="text"
 									className="form-control"
 									placeholder="Enter Description"
-									name="taskDesc"
+									name="description"
 									onChange={handleInputValues}
 									required={true}
 									minLength="5"

@@ -11,12 +11,17 @@ const AdminDashboard = () => {
 		showAddEvent: false,
 	});
 
+	const [loader, setLoader] = useState(true);
+
 	// Get register users data and update volunteerList
 	useEffect(() => {
 		if (toggleView.showList) {
 			fetch("https://still-stream-80611.herokuapp.com/loadVolunteerList")
 				.then((res) => res.json())
-				.then((data) => setVolunteerList(data));
+				.then((data) => {
+					setVolunteerList(data);
+					setLoader(false);
+				});
 		}
 	}, []);
 
@@ -94,7 +99,11 @@ const AdminDashboard = () => {
 					</div>
 					<div className="col-lg-9">
 						{toggleView.showList && (
-							<VolunteerList tasks={volunteerList} deleteHandler={handleDeleteEvent}></VolunteerList>
+							<VolunteerList
+								tasks={volunteerList}
+								deleteHandler={handleDeleteEvent}
+								loader={loader}
+							></VolunteerList>
 						)}
 						{toggleView.showAddEvent && <AddEvent></AddEvent>}
 					</div>

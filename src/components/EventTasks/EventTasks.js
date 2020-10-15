@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../../App";
+import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 import Task from "./Task";
 
 const EventTasks = () => {
@@ -10,6 +11,7 @@ const EventTasks = () => {
 	const [loggedInUser, setLoggedInUser] = user;
 
 	const [userTasks, setUserTasks] = useState([]);
+	const [loader, setLoader] = useState(true);
 
 	// Filtering tasks for an user
 	useEffect(() => {
@@ -17,6 +19,7 @@ const EventTasks = () => {
 			.then((res) => res.json())
 			.then((data) => {
 				setUserTasks([...data]);
+				setLoader(false);
 			})
 			.catch((err) => console.log(err));
 	}, []);
@@ -40,7 +43,9 @@ const EventTasks = () => {
 		<div className="container py-5 my-5">
 			<div className="vn-event-tasks">
 				<div className="row">
-					{userTasks.length > 0 ? (
+					{loader ? (
+						<LoadingAnimation></LoadingAnimation>
+					) : userTasks.length > 0 ? (
 						userTasks.map((task) => <Task task={task} key={Math.random()} deleteTask={deleteTask}></Task>)
 					) : (
 						<div style={{ maxWidth: "400px", margin: "auto" }}>

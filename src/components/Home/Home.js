@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../App";
 import { volunteerTasks } from "../../fakeData/fakeData";
+import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 import Card from "./Card";
 
 const Home = () => {
@@ -8,6 +9,8 @@ const Home = () => {
 
 	const { user, data } = useContext(UserContext);
 	const [baseData, setBaseData] = data;
+
+	const [loader, setLoader] = useState(true);
 
 	// If DB is empty then add fake data
 	const handleAddBaseData = () => {
@@ -27,6 +30,7 @@ const Home = () => {
 			.then((res) => res.json())
 			.then((data) => {
 				setBaseData(data);
+				setLoader(false);
 				console.log("Home->", data);
 			});
 	}, []);
@@ -44,7 +48,9 @@ const Home = () => {
 					</div>
 				</div>
 				<div className="vn-works py-5 mt-2">
-					{baseData.length ? (
+					{loader ? (
+						<LoadingAnimation></LoadingAnimation>
+					) : baseData.length ? (
 						<div className="row">
 							{baseData.map((task) => (
 								<Card task={task} key={Math.random()}></Card>
@@ -53,9 +59,9 @@ const Home = () => {
 					) : (
 						<div style={{ maxWidth: "400px", margin: "auto" }}>
 							<div className="alert alert-warning text-center mb-4">No data found.</div>
-							<button className="btn btn-primary" onClick={handleAddBaseData}>
-								All Base Data
-							</button>
+							{/* <button className="btn btn-primary" onClick={handleAddBaseData}>
+									Add Base Data
+								</button> */}
 						</div>
 					)}
 				</div>

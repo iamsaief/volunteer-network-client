@@ -1,6 +1,7 @@
 import React from "react";
+import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 
-const VolunteerList = ({ tasks, deleteHandler }) => {
+const VolunteerList = ({ tasks, deleteHandler, loader }) => {
 	return (
 		<div className="admin-vol-list">
 			<h5 className="display-5 py-lg-4 pb-2">Volunteer register list</h5>
@@ -16,7 +17,13 @@ const VolunteerList = ({ tasks, deleteHandler }) => {
 						</tr>
 					</thead>
 					<tbody>
-						{tasks.length > 0 ? (
+						{loader ? (
+							<tr>
+								<td colSpan="5">
+									<LoadingAnimation></LoadingAnimation>
+								</td>
+							</tr>
+						) : tasks.length > 0 ? (
 							tasks.map((task) => (
 								<tr key={task._id}>
 									<td>{task.name}</td>

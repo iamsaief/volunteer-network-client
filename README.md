@@ -2,13 +2,13 @@
 
 [<img src="./.github/vn-thumbnail.jpg" alt="" width="100%">](https://ims-volnet.web.app/)
 
-#### Features -
+### Features -
 
 -   Modern responsive home page to showcase available charity works.
 -   User can register for volunteer works
 -   Admin can add new task and manage registered users.
 
-#### Technologies -
+### Technologies -
 
 -   ReactJS
 -   Bootstrap
